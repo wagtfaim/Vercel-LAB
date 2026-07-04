@@ -1,8 +1,9 @@
 {
   "siteId": "lab-nextjs-site",
+  "sourceProject": "lab-nextjs-site",
   "sourceUrl": "https://lab-nextjs-site.vercel.app",
-  "recoveryMethod": "crawl",
-  "recoveryTool": "tools/crawl-site.mjs (repo: Vercel)",
+  "recoveryMethod": "vercel-api",
+  "recoveryTool": "tools/download-vercel-deployment.mjs (repo: Vercel)",
   "recoveredAt": "2026-07-04",
-  "notes": "Recuperado apenas via URL pública, simulando ausência de acesso ao código-fonte/build original. Navegação client-side (prefetch RSC) não é preservada pelo crawl; cada rota carrega como página completa, sem prejuízo funcional."
+  "notes": "Código-fonte real baixado via API da Vercel (GET /v6/deployments/{id}/files + /v7/.../files/{uid}), a partir do deployment de produção. Requer token com acesso ao time/projeto de origem. Diferente do método de crawl (tools/crawl-site.mjs), que só reproduz o HTML renderizado sem o código-fonte."
 }

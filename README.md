@@ -9,15 +9,20 @@ deployado como um projeto Vercel independente.
 ```
 sites/
   <site-slug>/
-    dist/         conteúdo estático pronto para deploy (HTML/CSS/JS/assets)
-    vercel.json   config de deploy desse site (outputDirectory, cleanUrls, etc.)
-    meta.json     metadados de recuperação (URL de origem, método, data)
+    (código-fonte completo do site, como baixado da Vercel: package.json, src/, public/, etc.)
+    meta.json     metadados de recuperação (origem, método, data)
 ```
 
-Cada site em `sites/<site-slug>/` é conectado a um projeto Vercel próprio, com o **Root
-Directory** do projeto apontando para `sites/<site-slug>`. Isso permite adicionar novos sites
-recuperados no futuro sem afetar os já publicados — basta criar uma nova pasta em `sites/` e um
-novo projeto Vercel apontando para ela.
+Cada site em `sites/<site-slug>/` é o **código-fonte real** do projeto (não uma cópia estática),
+recuperado via API da Vercel (`tools/download-vercel-deployment.mjs`, no repo `Vercel`). Cada pasta
+é conectada a um projeto Vercel próprio, com o **Root Directory** do projeto apontando para
+`sites/<site-slug>` — a Vercel detecta o framework (ex. Next.js) e roda o build normalmente a cada
+push. Isso permite adicionar novos sites recuperados no futuro sem afetar os já publicados — basta
+criar uma nova pasta em `sites/` e um novo projeto Vercel apontando para ela.
+
+Quando só há acesso à URL pública (sem token/API da Vercel), o método alternativo é o crawl
+(`tools/crawl-site.mjs`), que reproduz apenas o HTML renderizado — sem código-fonte. Ver
+`meta.json` de cada site para saber qual método foi usado.
 
 ## Sites
 
@@ -27,8 +32,8 @@ novo projeto Vercel apontando para ela.
 
 ## Fluxo de deploy
 
-1. Conteúdo é recuperado (via `tools/crawl-site.mjs` no repo `Vercel`, ou outro método) e colocado
-   em `sites/<site-slug>/dist`.
+1. Código-fonte é recuperado (via `tools/download-vercel-deployment.mjs` no repo `Vercel`) e
+   colocado em `sites/<site-slug>/`.
 2. Commit + push para este repositório.
-3. O projeto Vercel correspondente (Root Directory = `sites/<site-slug>`) faz o deploy automático
-   a cada push, sem necessidade de `vercel deploy` manual.
+3. O projeto Vercel correspondente (Root Directory = `sites/<site-slug>`) detecta o framework e
+   builda automaticamente a cada push, sem necessidade de `vercel deploy` manual.
