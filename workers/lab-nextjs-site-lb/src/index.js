@@ -11,7 +11,8 @@ async function fetchOrigin(origin, request, url) {
       headers: request.headers,
       signal: controller.signal,
     });
-    if (res.status >= 500) {
+    // >=400, not just >=500: an unassigned Vercel alias returns 404, not 5xx.
+    if (res.status >= 400) {
       throw new Error(`origin responded with ${res.status}`);
     }
     return res;
