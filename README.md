@@ -23,7 +23,7 @@ novo projeto Vercel apontando para ela.
 
 | Slug | Origem | Projeto Vercel |
 |---|---|---|
-| `lab-nextjs-site` | https://lab-nextjs-site.vercel.app | (ver painel Vercel) |
+| `lab-nextjs-site` | https://lab-nextjs-site.vercel.app | vercel-lab-nextjs-site |
 
 ## Fluxo de deploy
 
