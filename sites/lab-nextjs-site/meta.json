@@ -1,0 +1,8 @@
+{
+  "siteId": "lab-nextjs-site",
+  "sourceUrl": "https://lab-nextjs-site.vercel.app",
+  "recoveryMethod": "crawl",
+  "recoveryTool": "tools/crawl-site.mjs (repo: Vercel)",
+  "recoveredAt": "2026-07-04",
+  "notes": "Recuperado apenas via URL pública, simulando ausência de acesso ao código-fonte/build original. Navegação client-side (prefetch RSC) não é preservada pelo crawl; cada rota carrega como página completa, sem prejuízo funcional."
+}
