@@ -22,7 +22,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: sites/lab-nextjs-site
-        run: npm ci
+        run: npm install
 
       - name: Build
         working-directory: sites/lab-nextjs-site
